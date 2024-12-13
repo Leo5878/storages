@@ -8,9 +8,9 @@ interface SessionData {
 type MyContext = Context & SessionFlavor<SessionData>;
 
 async function bootstrap() {
-  const client = new MongoClient();
-  await client.connect("mongodb://localhost:27017");
-  const db = client.database("test");
+  const client = new MongoClient("mongodb://localhost:27017");
+  await client.connect();
+  const db = client.db("test");
   const sessions = db.collection<ISession>("users");
 
   const bot = new Bot<MyContext>("");
